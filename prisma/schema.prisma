@@ -1,0 +1,32 @@
+generator client {
+  provider     = "prisma-client"
+  output       = "../src/generated/prisma"
+  moduleFormat = "esm"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model Account {
+  id                String     @id @default(uuid())
+  label             String
+  balanceInCents    Int        @default(0)
+  createdAt         DateTime   @default(now())
+  updatedAt         DateTime   @updatedAt
+  outgoingTransfers Transfer[] @relation("OutgoingTransfers")
+  incomingTransfers Transfer[] @relation("IncomingTransfers")
+}
+
+model Transfer {
+  id                   String   @id @default(uuid())
+  sourceAccountId      String
+  destinationAccountId String
+  amountInCents        Int
+  createdAt            DateTime @default(now())
+  sourceAccount        Account  @relation("OutgoingTransfers", fields: [sourceAccountId], references: [id], onDelete: Restrict)
+  destinationAccount   Account  @relation("IncomingTransfers", fields: [destinationAccountId], references: [id], onDelete: Restrict)
+
+  @@index([sourceAccountId])
+  @@index([destinationAccountId])
+}
