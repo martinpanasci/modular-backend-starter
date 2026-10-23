@@ -22,7 +22,7 @@ modular-backend-starter/
 
 ## Inicio rápido
 
-Requiere Node.js >=22.12.0 y PostgreSQL para ejecutar la aplicación.
+Requiere Node.js 22.23.4+ (rama 22) o 24.22.1+ (rama 24) y PostgreSQL para ejecutar la aplicación.
 
 Desde la raíz del repositorio:
 

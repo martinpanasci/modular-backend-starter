@@ -4,3 +4,12 @@ updates:
     directory: "/server"
     schedule:
       interval: weekly
+    groups:
+      nestjs:
+        patterns: ["@nestjs/*"]
+      prisma:
+        patterns: ["prisma", "@prisma/*"]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
